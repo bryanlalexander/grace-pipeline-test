@@ -38,7 +38,6 @@ jobs:
     steps:
       - checkout
       - run: |
-          sleep 5
           exit 1
 
 workflows:
