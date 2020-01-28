@@ -8,7 +8,23 @@ jobs:
       - run: |
           sleep 30
           exit 0
-  test_pass:
+  test:
+    docker:
+      - image: circleci/golang:latest
+    steps:
+      - checkout
+      - run: |
+          sleep 30
+          exit 0
+  test_pass1:
+    docker:
+      - image: circleci/golang:latest
+    steps:
+      - checkout
+      - run: |
+          sleep 30
+          exit 0
+  test_pass2:
     docker:
       - image: circleci/golang:latest
     steps:
@@ -29,6 +45,14 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - test_pass
-      - test_fail
+      - test
+      - test_pass:
+          - requires:
+              - test
+      - test_fail:
+          - requires:
+              - test
+      - build:
+          - requires:
+              - test_pass1
+              - test_pass2
