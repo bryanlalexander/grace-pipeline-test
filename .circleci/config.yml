@@ -46,13 +46,16 @@ workflows:
   build_and_test:
     jobs:
       - test
-      - test_pass:
-          - requires:
+      - test_pass1:
+          requires:
+              - test
+      - test_pass2:
+          requires:
               - test
       - test_fail:
-          - requires:
+          requires:
               - test
       - build:
-          - requires:
+          requires:
               - test_pass1
               - test_pass2
